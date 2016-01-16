@@ -1,0 +1,61 @@
+{
+  "name": "promise-runner",
+  "version": "1.0.0",
+  "description": "Run interdependent functions that return promises in order based on their dependencies",
+  "main": "lib/PromiseRunner.js",
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run pre-commit",
+      "commit-msg": "validate-commit-msg",
+      "post-commit": "npm run post-commit"
+    }
+  },
+  "scripts": {
+    "pre-commit": "npm run build && npm run test:light && npm run document",
+    "post-commit": "npm run build:commit && npm run document:commit",
+
+    "travis:script": "npm run test && npm run coveralls",
+    "travis:after-success": "npm run semantic-release",
+
+    "pretest": "npm run build",
+    "test": "lint-coffee src && npm run document:check && nsp check && test-server-module -c",
+    "test:light": "test-server-module && lint-coffee src",
+
+    "build": "coffee -c -o lib/ src/",
+    "build:commit": "git add lib/ && git commit lib/ -n -m \"chore: update build\" || echo \"No changes committed\"",
+
+    "document": "codo src --min-coverage 100",
+    "document:check": "codo src --test --min-coverage 100",
+    "document:commit": "git add doc/ && git commit doc/ -n -m \"docs: update documentation\" || echo \"No changes committed\"",
+
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "coveralls": "cat coverage/lcov/coverage.txt | coveralls"
+  },
+  "directories": {
+    "example": "examples",
+    "doc": "doc"
+  },
+  "keywords": [
+    "Promise",
+    "bluebird",
+    "async",
+    "tasks"
+  ],
+  "author": "Daniel Bartholomae <db@wappforge.com> (http://www.wappforge.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.1.1",
+    "dependency-graph": "^0.4.1",
+    "winston": "^2.1.1"
+  },
+  "devDependencies": {
+    "ghooks": "*",
+    "validate-commit-msg": "*",
+    "semantic-release": "^4.3.5",
+    "coveralls": "*",
+    "codo": "git://github.com/dbartholomae/codo.git",
+    "nsp": "*",
+    "lint-coffee": "../../setup/lint-coffee",
+    "test-server-module": "../../setup/test-server-module"
+  }
+}

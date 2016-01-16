@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset='UTF-8'>
+  <title>CoffeeScript API Documentation</title>
+  <script src='../javascript/application.js'></script>
+  <script src='../javascript/search.js'></script>
+  <link rel='stylesheet' href='../stylesheets/application.css' type='text/css'>
+</head>
+  <body>
+    <div id='base' data-path='../'></div>
+<div id='header'>
+  <div id='menu'>
+    <a href='../alphabetical_index.html' title='Index'>
+      Index
+    </a>
+    &raquo;
+    <span class='title'>PromiseRunner</span>
+  </div>
+</div>
+    <div id='content'>
+      <h1>
+        Class:
+        PromiseRunner
+      </h1>
+      <table class='box'>
+        <tr>
+          <td>Defined in:</td>
+          <td>src\PromiseRunner.coffee</td>
+        </tr>
+      </table>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <p>A PromiseRunner runs multiple functions that are dependent on each other in the correct order.
+Tasks are defined as an object <code>{ taskName: task, ... }</code>, with <code>task</code> being either a function
+that has no dependencies, an array where the first element is the function and the rest are
+the names of tasks it depends on, or an object <code>{ fn: function, deps: [string] }</code>.
+Each task will be run with the results of its dependencies as parameters.
+Tasks can either return values or promises that return their values.</p>
+</div>
+<div class='tags'>
+</div>
+      <h2>Instance Method Summary</h2>
+      <ul class='summary'>
+  <li>
+    <span class='signature'>
+      <a href='#run-dynamic'>
+        #
+(Promise)
+<b>run</b><span>(tasks)</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Run a set of tasks and return a promise that resolves when all are run and rejects with &quot;Dependency Cycle Found&quot; if there is a dependency cycle.
+
+    </span>
+  </li>
+</ul>
+      <h2>Constructor Details</h2>
+      <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='constructor-dynamic'>
+      #
+(void)
+<b>constructor</b><span>(options)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Create a new PromiseRunner</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+</div>
+      <h2>Instance Method Details</h2>
+      <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='run-dynamic'>
+      #
+(Promise)
+<b>run</b><span>(tasks)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Run a set of tasks and return a promise that resolves when all are run and rejects
+with &quot;Dependency Cycle Found&quot; if there is a dependency cycle.</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>tasks</span>
+      <span class='type'>
+        (
+          <tt>object</tt>
+        )
+      </span>
+      &mdash;
+      <span class='desc'>task definitions </span>
+    </li>
+  </ul>
+  <h3>Throws:</h3>
+  <ul class='throw'>
+    <li>
+      <span class='type'></span>
+      (
+        <tt>Error(&quot;No tasks defined&quot;)</tt>
+      )
+      &mdash;
+      <span class='desc'>if tasks is undefined </span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (
+        <tt>Promise</tt>
+      )
+      &mdash;
+      <span class='desc'>A promise resolving when all tasks where run </span>
+    </li>
+  </ul>
+</div>
+  </div>
+</div>
+    </div>
+    <div id='footer'>
+  By
+  <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
+    Codo
+  </a>
+  2.0.10
+  &#10034;
+  Press H to see the keyboard shortcuts
+  &#10034;
+  <a href='http://twitter.com/netzpirat' target='_parent'>@netzpirat</a>
+  &#10034;
+  <a href='http://twitter.com/_inossidabile' target='_parent'>@_inossidabile</a>
+</div>
+<iframe id='search_frame'></iframe>
+<div id='fuzzySearch'>
+  <input type='text'>
+  <ol></ol>
+</div>
+<div id='help'>
+  <p>
+    Quickly fuzzy find classes, mixins, methods, file:
+  </p>
+  <ul>
+    <li>
+      <span>T</span>
+      Open fuzzy finder dialog
+    </li>
+  </ul>
+  <p>
+    Control the navigation frame:
+  </p>
+  <ul>
+    <li>
+      <span>L</span>
+      Toggle list view
+    </li>
+    <li>
+      <span>C</span>
+      Show class list
+    </li>
+    <li>
+      <span>I</span>
+      Show mixin list
+    </li>
+    <li>
+      <span>F</span>
+      Show file list
+    </li>
+    <li>
+      <span>M</span>
+      Show method list
+    </li>
+    <li>
+      <span>E</span>
+      Show extras list
+    </li>
+  </ul>
+  <p>
+    You can focus and blur the search input:
+  </p>
+  <ul>
+    <li>
+      <span>S</span>
+      Focus search input
+    </li>
+    <li>
+      <span>Esc</span>
+      Blur search input
+    </li>
+  </ul>
+</div>
+  </body>
+</html>
