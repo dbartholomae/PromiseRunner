@@ -60,6 +60,9 @@ module.exports = class PromiseRunner
       winston.debug "Loading task " + taskName + " from cache"
       return cache[taskName]
 
+    unless tasks[taskName]?
+      return Promise.reject "Task not defined: " + taskName
+
     winston.debug "Loading task " + taskName + " by running it"
     cache[taskName] = Promise.all tasks[taskName].deps
     .map (dep) ->

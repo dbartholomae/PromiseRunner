@@ -32,5 +32,12 @@ describe "A PromiseRunner", ->
     expect(new PromiseRunner().run(tasks))
     .to.eventually.be.rejectedWith 'Dependency Cycle Found'
 
+  it "rejects if there is an undefined dependency", ->
+    tasks = {
+      a: [(-> undefined), 'b']
+    }
+    expect(new PromiseRunner().run(tasks))
+    .to.eventually.be.rejectedWith 'Task not defined'
+
   it "throws an error if tasks are not defined", ->
     expect(-> new PromiseRunner().run()).to.throw "No tasks defined"
