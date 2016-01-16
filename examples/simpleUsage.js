@@ -14,3 +14,4 @@ var fns = {
 
 result = new PromiseRunner().run(fns);
 result.then(console.log);
+// [1, 2, 3]

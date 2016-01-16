@@ -54,7 +54,8 @@ module.exports = class PromiseRunner
 
   # Load all dependencies for a task run it and add it to the cache.
   # @param taskName [String] The name of the task to load
-  load = (taskName, tasks) ->
+  # @param args [Array] Further arguments to pass to each task
+  load = (taskName, tasks, args) ->
     if cache[taskName]?
       winston.debug "Loading task " + taskName + " from cache"
       return cache[taskName]
@@ -63,10 +64,10 @@ module.exports = class PromiseRunner
     cache[taskName] = Promise.all tasks[taskName].deps
     .map (dep) ->
       winston.debug "  Loading dependency " + dep + " of task " + taskName
-      load dep, tasks
+      load dep, tasks, args
     .then (arr) ->
       winston.debug "  Dependencies for task " + taskName + " loaded, running task"
-      tasks[taskName].fn arr...
+      tasks[taskName].fn arr.concat(args)...
 
   # Create a new PromiseRunner
   constructor: (options) ->
@@ -81,9 +82,10 @@ module.exports = class PromiseRunner
   # Run a set of tasks and return a promise that resolves when all are run and rejects
   # with "Dependency Cycle Found" if there is a dependency cycle.
   # @param tasks [object] task definitions
+  # @param args... [object] further arguments to pass to each task
   # @return [Promise] A promise resolving when all tasks where run
   # @throw [Error("No tasks defined")] if tasks is undefined
-  run: (tasks) ->
+  run: (tasks, args...) ->
     throw new Error "No tasks defined" unless tasks?
     winston.debug "Preparing to run tasks " + Object.keys tasks
     tasks = parseTasks(tasks)
@@ -95,4 +97,4 @@ module.exports = class PromiseRunner
     winston.debug "Order determined: " + order
     return Promise.all order
     .map (task) ->
-      load task, tasks
+      load task, tasks, args
