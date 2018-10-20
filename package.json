@@ -40,13 +40,13 @@
   "license": "MIT",
   "dependencies": {
     "bluebird": "^3.1.1",
-    "dependency-graph": "^0.4.1",
-    "winston": "^2.1.1"
+    "dependency-graph": "^0.7.2",
+    "winston": "^3.1.0"
   },
   "devDependencies": {
     "ghooks": "*",
     "validate-commit-msg": "*",
-    "semantic-release": "^4.3.5",
+    "semantic-release": "^15.10.4",
     "coveralls": "*",
     "codo": "git://github.com/dbartholomae/codo.git",
     "nsp": "*",
